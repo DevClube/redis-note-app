@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from 'axios';
+import { useEffect, useState } from "react";
+import { AddNote } from "./AddNote"; // Removed the .tsx extension
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Note {
+    text: string;
 }
 
-export default App
+function App() {
+    const [notes, setNotes] = useState<Note[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/notes')
+            .then(response => {
+                setNotes(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the notes!', error);
+            });
+    }, []);
+
+    const addNote = (noteText: string) => { // Corrected the type of noteText
+        axios.post('http://localhost:5000/notes', { text: noteText })
+            .then(() => {
+                setNotes([...notes, { text: noteText }]);
+                setIsModalOpen(false);
+            })
+            .catch(error => {
+                console.error('There was an error adding the note!', error);
+            });
+    };
+
+    return (
+        <>
+            <nav className="navbar p-3">
+                <h2 className="font-monospace">Note Redis App</h2>
+                <button onClick={() => setIsModalOpen(true)} type="button"
+                        className="btn btn-dark font-monospace">
+                    <i className="bi bi-plus me-2"></i>Add Note
+                </button>
+            </nav>
+            <div>
+                <div className="row m-3">
+                    {notes.map((note, index) => (
+                        <div className="col-md-3 mb-4" key={index}>
+                            <div className="card h-100">
+                                <div className="card-body">
+                                    <p className="card-text">{note.text}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <AddNote
+                    isOpen={isModalOpen}
+                    onRequestClose={() => setIsModalOpen(false)}
+                    onSubmit={addNote}
+                />
+            </div>
+        </>
+    );
+}
+
+export default App;
