@@ -1,30 +1,40 @@
-# React + TypeScript + Vite
+# Note Redis App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple note-taking application that uses React for the frontend and Redis for the backend storage. It allows users to add and view notes.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add notes
+- View all notes
+- Simple and intuitive UI
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Frontend: React
+- Backend: Node.js, Express, Redis
+- Database: Redis
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+To get a local copy up and running follow these simple steps.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Prerequisites
+
+- npm
+  ```sh
+  npm install npm@latest -g
+
+Redis server running on your local machine or a remote instance
+Installation
+Clone the repo<pre>git clone https://github.com/your_username_/Project-Name.git </pre>
+Install NPM packages<pre>npm install </pre>
+Start the backend server<pre>cd backend npm start </pre>
+Start the frontend application<pre>cd ../src npm start </pre>
+### Usage
+After starting the application, you can add new notes using the "Add Note" button and view all the added notes on the main page.  
+### Screenshots
+#### Home page
+![add note](/screenshots/Home.png)
+
+#### Add note
+![add note](/screenshots/edit.png)
