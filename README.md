@@ -27,7 +27,7 @@ To get a local copy up and running follow these simple steps.
 Redis server running on your local machine or a remote instance
 ### Installation
 
-  Clone the repo<pre>git clone [https://github.com/your_username_/Project-Name.git](https://github.com/DevClube/redis-note-app.git) </pre>
+  Clone the repo<pre>git clone [https://github.com/DevClube/redis-note-app.git](https://github.com/DevClube/redis-note-app.git) </pre>
 Install NPM packages
   <pre>npm install </pre>
 Start the backend server<pre>cd backend npm start </pre>
